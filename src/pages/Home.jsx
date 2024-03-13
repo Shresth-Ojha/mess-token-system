@@ -84,7 +84,7 @@ export const Home = () => {
 
     const logout = () => {
         localStorage.removeItem('token');
-        location.reload()
+        location.reload();
     };
 
     useEffect(() => {
@@ -93,24 +93,28 @@ export const Home = () => {
 
     return (
         <ThemeProvider theme={defaultTheme}>
-            <Container component="main" maxWidth="xs">
+            <Container
+                component="main"
+                maxWidth="md"
+                sx={{ bgcolor: userTokenStatus ? '#e31e1c70' : '#23ea15CC' }}
+            >
                 <Box
                     sx={{
                         display: 'flex',
                         flexDirection: 'column',
                         alignItems: 'center',
-                        justifyContent: 'center',
+                        justifyContent: 'space-evenly',
                         height: '100vh',
                         // transform: 'scale(1.5)',
                     }}
                 >
-                    <Box sx={{ mt: 1 }}>
-                        <Typography variant="h6">
-                            <Typography sx={{ display: 'inline' }}>
+                    <Box sx={{ textAlign: 'center' }}>
+                        <Typography variant="h5">
+                            <Typography variant="h6" sx={{ display: 'inline' }}>
                                 Name: &nbsp;
                             </Typography>
                             {user.name} <br />
-                            <Typography sx={{ display: 'inline' }}>
+                            <Typography variant="h6" sx={{ display: 'inline' }}>
                                 Token: &nbsp;
                             </Typography>
                             {userTokenStatus
@@ -119,21 +123,25 @@ export const Home = () => {
                                 ? 'Does not exit'
                                 : 'Not Used'}
                         </Typography>
-                    </Box>
-                    <Box sx={{ mt: 5 }}>
+                        {/* </Box>
+                    <Box sx={{ mt: 5 }}> */}
                         <Button
                             variant="contained"
                             disabled={!(userTokenStatus === false)}
                             onClick={useToken}
-                            sx={{ fontSize: 18 }}
+                            sx={{ mt: 4, fontSize: 25 }}
                         >
                             Use Token
                         </Button>
                     </Box>
 
-                    <Box sx={{ mt: 1 }}>
+                    <Box
+                        sx={{
+                            mt: 1,
+                        }}
+                    >
                         <Button
-                            variant="outlined"
+                            variant="contained"
                             onClick={logout}
                             sx={{ fontSize: 18 }}
                         >
