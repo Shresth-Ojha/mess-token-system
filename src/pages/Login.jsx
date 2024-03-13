@@ -54,7 +54,9 @@ export const Login = () => {
                     height: '100vh',
                 }}
             >
-                <GoogleOAuthProvider clientId="127950501475-kg7c8bricb59hdbr27keihekkhvvq0mo.apps.googleusercontent.com">
+                <GoogleOAuthProvider
+                    clientId={import.meta.env.VITE_GOOGLE_OAUTH_CLIENT_ID}
+                >
                     <GoogleLogin
                         onSuccess={async (credentialResponse) => {
                             console.log(
