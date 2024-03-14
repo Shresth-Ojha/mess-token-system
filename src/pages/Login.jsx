@@ -43,16 +43,23 @@ export const Login = () => {
     };
 
     return (
-        <Container component="main" maxWidth="xs">
+        <Container
+            component="main"
+            maxWidth="xs"
+            sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                height: '100vh',
+            }}
+            >
             <Box
-                sx={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    transform: 'scale(1.5)',
-                    height: '100vh',
-                }}
+                sx={
+                    {
+                        transform: 'scale(1.5)',
+                    }
+                }
             >
                 <GoogleOAuthProvider
                     clientId={import.meta.env.VITE_GOOGLE_OAUTH_CLIENT_ID}

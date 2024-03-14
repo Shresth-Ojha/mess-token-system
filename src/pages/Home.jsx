@@ -96,7 +96,7 @@ export const Home = () => {
             <Container
                 component="main"
                 maxWidth="md"
-                sx={{ bgcolor: userTokenStatus ? '#e31e1c70' : '#23ea15CC' }}
+                sx={{ bgcolor: userTokenStatus === null ? '': userTokenStatus? '#e31e1c70' : '#23ea15CC' }}
             >
                 <Box
                     sx={{
