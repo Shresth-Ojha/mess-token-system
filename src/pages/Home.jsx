@@ -13,7 +13,7 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { red } from '@mui/material/colors';
 import { AuthContext, useStore } from '../store/storeWrapper';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 // TODO remove, this demo shouldn't need to reset the theme.
 
@@ -34,6 +34,7 @@ const defaultTheme = createTheme({
 export const Home = () => {
     const { user, userTokenStatus, setUserTokenStatus } = useStore();
 
+    const [date, setDate] = useState(new Date());
     console.log('from home =', user);
 
     const getToken = async () => {
@@ -87,6 +88,10 @@ export const Home = () => {
         location.reload();
     };
 
+    setInterval(() => {
+        setDate(new Date());
+    }, 1000);
+
     useEffect(() => {
         getToken();
     }, []);
@@ -96,7 +101,14 @@ export const Home = () => {
             <Container
                 component="main"
                 maxWidth="md"
-                sx={{ bgcolor: userTokenStatus === null ? '': userTokenStatus? '#e31e1c70' : '#23ea15CC' }}
+                sx={{
+                    bgcolor:
+                        userTokenStatus === null
+                            ? ''
+                            : userTokenStatus
+                            ? '#e31e1c70'
+                            : '#23ea15CC',
+                }}
             >
                 <Box
                     sx={{
@@ -108,6 +120,24 @@ export const Home = () => {
                         // transform: 'scale(1.5)',
                     }}
                 >
+                    <Button
+                        variant="contained"
+                        sx={{
+                            color: 'white',
+                            // bgcolor: 'grey',
+                            borderRadius: '6px',
+                        }}
+                    >
+                        <Typography variant="h2">
+                            {date.getHours() < 10
+                                ? '0' + date.getHours()
+                                : date.getHours()}{' '}
+                            : {date.getMinutes()} :{' '}
+                            {date.getSeconds() < 10
+                                ? '0' + date.getSeconds()
+                                : date.getSeconds()}
+                        </Typography>
+                    </Button>
                     <Box sx={{ textAlign: 'center' }}>
                         <Typography variant="h5">
                             <Typography variant="h6" sx={{ display: 'inline' }}>
