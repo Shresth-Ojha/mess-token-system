@@ -1,18 +1,10 @@
-import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { red } from '@mui/material/colors';
-import { AuthContext, useStore } from '../store/storeWrapper';
+import { useStore } from '../store/storeWrapper';
 import { useEffect, useState } from 'react';
 
 // TODO remove, this demo shouldn't need to reset the theme.
@@ -35,7 +27,7 @@ export const Home = () => {
     const { user, userTokenStatus, setUserTokenStatus } = useStore();
 
     const [date, setDate] = useState(new Date());
-    console.log('from home =', user);
+    // console.log('from home =', user);
 
     const getToken = async () => {
         const requestOptions = {
@@ -96,18 +88,26 @@ export const Home = () => {
         getToken();
     }, []);
 
-    return (
+    return userTokenStatus === null ? (
+        <Box
+            sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                alignItems: 'center',
+                height: '100vh',
+            }}
+        >
+            <img src="/images/loading.gif" alt="Loading..." />
+        </Box>
+    ) : (
         <ThemeProvider theme={defaultTheme}>
             <Container
                 component="main"
                 maxWidth="md"
                 sx={{
-                    bgcolor:
-                        userTokenStatus === null
-                            ? ''
-                            : userTokenStatus
-                            ? '#e31e1c70'
-                            : '#23ea15CC',
+                    transition: 'background-color 2s ease',
+                    bgcolor: userTokenStatus ? '#e31e1c70' : '#23ea15CC',
                 }}
             >
                 <Box
@@ -132,7 +132,11 @@ export const Home = () => {
                             {date.getHours() < 10
                                 ? '0' + date.getHours()
                                 : date.getHours()}{' '}
-                            : {date.getMinutes()} :{' '}
+                            :{' '}
+                            {date.getMinutes() < 10
+                                ? '0' + date.getMinutes()
+                                : date.getMinutes()}{' '}
+                            :{' '}
                             {date.getSeconds() < 10
                                 ? '0' + date.getSeconds()
                                 : date.getSeconds()}
