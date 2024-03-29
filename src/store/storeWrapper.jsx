@@ -21,7 +21,7 @@ const AuthWrapper = ({ children }) => {
                 '------------------ Error while connecting to server ------------------ \n',
                 error
             );
-            alert('Failed to connect to server.\nTry after sometime.');
+            alert('Server spinning up, refresh after 1 minute.');
             // location.reload();
             return;
         }
